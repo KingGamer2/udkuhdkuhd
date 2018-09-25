@@ -182,8 +182,9 @@ client.login(process.env.BOT_TOKEN);
 });
 
 client.on('message', message => {
-    if(message.content.startsWith(prefix+'bchelp')) {
+    if(message.content.startsWith(prefix+'hbc')) {	
    const embed = new Discord.RichEmbed()
+  .setThumbnail(message.author.avatarURL)   
 .setColor('RANDOM')
         .setDescription(`**
 		
