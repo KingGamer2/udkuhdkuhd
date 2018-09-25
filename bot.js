@@ -2,18 +2,49 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const adminprefix = "--"
 const prefix = "!"
-client.on("message", message => {
 
-            if (message.content.startsWith(prefix + "1bc")) {
-                         if (!message.member.hasPermission("ADMINISTRATOR"))  return;
-  let args = message.content.split(" ").slice(1);
-  var argresult = args.join(' '); 
-  message.guild.members.filter(m => m.presence.status !== 'all').forEach(m => {
- m.send(`${argresult}\n ${m}`);
-})
- message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'all').size}\` : عدد الاعضاء المستلمين`); 
- message.delete(); 
-};     
+
+
+
+client.on('message', message => {
+    if(message.content.startsWith(prefix+'hbc')) {	
+   const embed = new Discord.RichEmbed()
+  .setThumbnail(message.author.avatarURL)   
+.setColor('RANDOM')
+        .setDescription(`**
+		
+          Commands. 
+${prefix}1bc - برودكاست للجميع
+${prefix}2bc - برودكاست بريئاكشن 
+${prefix}bcrole - برودكاست لرتبة معينة 
+**`)
+    message.author.send(embed)
+message.channel.send(":white_check_mark: | Check Your DM تم الأرسال بلخاص")
+    }
+});  
+
+
+client.on('message', message => {
+    if (message.author.id === client.user.id) return;
+    if (message.guild) {
+   let embed = new Discord.RichEmbed()
+    let args = message.content.split(' ').slice(1).join(' ');
+if(message.content.split(' ')[0] == prefix + '1bc') {
+    if (!args[1]) {
+return;
+}
+        message.guild.members.forEach(m => {
+   if(!message.member.hasPermission('ADMINISTRATOR')) return;
+            var bc = new Discord.RichEmbed()
+            .addField(' » الرسالة : ', args)
+            .setColor('#ff0000')
+            // m.send(`[${m}]`);
+            m.send(`${m}`,{embed: bc});
+        });
+    }
+    } else {
+        return;
+    }
 });
 client.on('message', message => {
   if(!message.channel.guild) return;
@@ -181,22 +212,7 @@ client.login(process.env.BOT_TOKEN);
     }
 });
 
-client.on('message', message => {
-    if(message.content.startsWith(prefix+'hbc')) {	
-   const embed = new Discord.RichEmbed()
-  .setThumbnail(message.author.avatarURL)   
-.setColor('RANDOM')
-        .setDescription(`**
-		
-          Commands. 
-${prefix}1bc - برودكاست للجميع
-${prefix}2bc - برودكاست بريئاكشن 
-${prefix}bcrole - برودكاست لرتبة معينة 
-**`)
-    message.author.send(embed)
-message.channel.send(":white_check_mark: | Check Your DM تم الأرسال بلخاص")
-    }
-});  
+
 
 
 client.login(process.env.BOT_TOKEN);
