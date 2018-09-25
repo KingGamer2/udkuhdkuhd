@@ -189,8 +189,8 @@ client.on('message', message => {
         .setDescription(`**
 		
           Commands. 
-${prefix}bc - برودكاست للجميع
-${prefix}1bc - برودكاست بريئاكشن 
+${prefix}1bc - برودكاست للجميع
+${prefix}2bc - برودكاست بريئاكشن 
 ${prefix}bcrole - برودكاست لرتبة معينة 
 **`)
     message.author.send(embed)
