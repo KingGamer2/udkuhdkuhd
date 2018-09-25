@@ -15,7 +15,6 @@ client.on("message", message => {
  message.delete(); 
 };     
 });
-var prefix = "+"
 client.on('message', message => {
   if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + "1bc")) {
@@ -194,7 +193,8 @@ ${prefix}1bc - برودكاست بريئاكشن
 ${prefix}bcrole - برودكاست لرتبة معينة 
 **`)
     message.author.send(embed)
-}
+message.channel.send(":white_check_mark: | Check Your DM تم الأرسال بلخاص")
+    }
 });  
 
 
