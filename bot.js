@@ -16,6 +16,7 @@ client.on('message', message => {
           Commands. 
 ${prefix}1bc - برودكاست للجميع
 ${prefix}2bc - برودكاست بريئاكشن 
+${prefix}3bc - برودكاست للاون لاين 
 ${prefix}bcrole - برودكاست لرتبة معينة 
 **`)
     message.author.send(embed)
@@ -29,7 +30,7 @@ if (message.author.id === client.user.id) return;
 if (message.guild) {
 let embed = new Discord.RichEmbed()
 let args = message.content.split(' ').slice(1).join(' ');
-if(message.content.split(' ')[0] == prefix + 'bc2') {
+if(message.content.split(' ')[0] == prefix + '1bc') {
 if(!message.channel.guild) return message.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');         
 if (!args[1]) {
 return;
@@ -55,7 +56,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
 client.on('message', message => {
   if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + "2bc")) {
+if(message.content.startsWith(prefix + '2bc')) {
 if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
 if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
 let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
@@ -136,6 +137,19 @@ client.on('message' , message => {
 });
 
 
+client.on("message", message => {
+
+            if (message.content.startsWith(prefix + "3bc")) {
+                         if (!message.member.hasPermission("ADMINISTRATOR"))  return;
+  let args = message.content.split(" ").slice(1);
+  var argresult = args.join(' '); 
+  message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
+ m.send(`${argresult}\n ${m}`);
+})
+ message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'online').size}\` : عدد الاعضاء المستلمين`); 
+ message.delete(); 
+};     
+});
 
 
 client.on('message', function(message) {
