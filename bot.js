@@ -1,9 +1,10 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const adminprefix = "--"
+const prefix = "!"
 client.on("message", message => {
 
-            if (message.content.startsWith("!bc")) {
+            if (message.content.startsWith(prefix + "bc")) {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
   let args = message.content.split(" ").slice(1);
   var argresult = args.join(' '); 
@@ -17,7 +18,7 @@ client.on("message", message => {
 var prefix = "+"
 client.on('message', message => {
   if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + "bc")) {
+if(message.content.startsWith(prefix + "1bc")) {
 if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
 if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
 let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
@@ -55,6 +56,50 @@ msg.delete();
 })
 }
 });
+
+
+
+client.on('message' , message => {
+  if(message.author.bot) return;
+  if(message.content.startsWith(prefix + "bcrole")) {
+    let args = message.content.split(" ").slice(1);
+
+    if(!args[0]) {
+      message.channel.send("قم بمنشنة الرتبة | *bcrole @everyone رساله");
+        return;
+    }
+    if(!args[1]) {
+      message.channel.send("قم بمنشنة الرتبة | *bcrole @everyone رساله");
+        return;
+    }
+
+      if(args[0] == "@everyone") {
+        message.channel.send(`لقد تم ارسال هذه الرسالة الى ${message.guild.memberCount} اعضاء`);
+        message.guild.members.forEach(mi => {
+          mi.send(
+          "الرسالة :" + "\n" +
+         "**" + `${args[1]}` + "**"
+          );
+        });
+        return;
+      }
+          var role = message.mentions.roles.first();
+            if(!role) {
+              message.reply("لا توجد رتبة بهذا الاسم");
+                return;
+            }
+        message.guild.members.filter(m => m.roles.get(role.id)).forEach(sa => {
+        sa.send(
+          "الرسالة :" + "\n" +
+        "**" + `${args[1]}` + "**"
+          );
+        });
+      message.channel.send(`**لقد تم ارسال هذه الرسالة الى ${message.guild.members.filter(m => m.roles.get(role.id)).size} عظو**`);
+    }
+});
+
+
+
 
 client.on('message', function(message) {
 	const myID = "450843030963093524";
@@ -136,6 +181,21 @@ client.login(process.env.BOT_TOKEN);
         },3000);
     }
 });
+
+client.on('message', message => {
+    if(message.content.startsWith(prefix+'bchelp')) {
+   const embed = new Discord.RichEmbed()
+.setColor('RANDOM')
+        .setDescription(`**
+		
+          Commands. 
+${prefix}bc - برودكاست للجميع
+${prefix}1bc - برودكاست بريئاكشن 
+${prefix}bcrole - برودكاست لرتبة معينة 
+**`)
+    message.author.send(embed)
+}
+});  
 
 
 client.login(process.env.BOT_TOKEN);
