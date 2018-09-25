@@ -4,7 +4,7 @@ const adminprefix = "--"
 const prefix = "!"
 client.on("message", message => {
 
-            if (message.content.startsWith(prefix + "bc")) {
+            if (message.content.startsWith(prefix + "1bc")) {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
   let args = message.content.split(" ").slice(1);
   var argresult = args.join(' '); 
@@ -17,7 +17,7 @@ client.on("message", message => {
 });
 client.on('message', message => {
   if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + "1bc")) {
+if(message.content.startsWith(prefix + "2bc")) {
 if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
 if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
 let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
@@ -64,11 +64,11 @@ client.on('message' , message => {
     let args = message.content.split(" ").slice(1);
 
     if(!args[0]) {
-      message.channel.send("قم بمنشنة الرتبة | *bcrole @everyone رساله");
+      message.channel.send("قم بمنشنة الرتبة | ");
         return;
     }
     if(!args[1]) {
-      message.channel.send("قم بمنشنة الرتبة | *bcrole @everyone رساله");
+      message.channel.send("قم بمنشنة الرتبة | ");
         return;
     }
 
